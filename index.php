@@ -10,13 +10,41 @@
 </head>
 <body>
 	
-	
+	<?php 
+		/**
+		 * 
+		 */
+		if ( isset($_POST['submit']) ) {
+			//Value get from form
+			$name 	= $_POST['name'];
+			$email 	= $_POST['email'];
+			$cell 	= $_POST['cell'];
+
+			//Photo management
+			$photo 	= $_FILES['photo']['name'];
+
+			if ( empty($name) || empty($email) || empty($cell) ) {
+				$mess = '<p class="alert alert-danger">All fields are required ! <button class="close" data-dismiss="alert">&times;</button></p>';
+			}elseif( !filter_var($email, FILTER_VALIDATE_EMAIL) ){
+				$mess = '<p class="alert alert-danger">Invalid email address ! <button class="close" data-dismiss="alert">&times;</button></p>';
+			}else{
+				
+			}
+		} // End of if
+	?>
 
 	<div class="wrap ">
 		<a class="btn btn-sm btn-primary" href="data.php">All Students</a>
 		<div class="card shadow">
 			<div class="card-body">
 				<h2>Sign Up</h2>
+
+				<?php
+					if( isset($mess) ){
+						echo $mess;
+					} 
+				?>			
+
 				<form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" enctype="multipart/form-data" >
 					<div class="form-group">
 						<label for="">Name</label>
