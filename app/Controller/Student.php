@@ -43,6 +43,29 @@
 			}
 			
 		}
+
+		/**
+		 * Delete Single Student Data
+		 */
+		public function deleteStudent($id)
+		{
+			$data = $this -> delete('students', $id);
+
+			if ( $data ) {
+				return '<p class="alert alert-success">Student data deleted successfull ! <button class="close" data-dismiss="alert">&times;</button></p>';
+			}
+		}
+
+		/**
+		 * Show Single Student
+		 */
+		public function singleStudent($id)
+		{
+			$data = $this -> find('students', $id);
+			if ( $data ) {
+				return $data;
+			}
+		}
 	} //End of class Student extends Database
 
 

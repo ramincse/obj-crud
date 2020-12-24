@@ -123,6 +123,34 @@
 				return $data;
 			}
 		}
+
+		/**
+		 * Delete Data
+		 */
+		protected function delete($table, $id)
+		{
+			//Data Delete
+			$sql = "DELETE FROM $table WHERE id='$id'";
+			$data = $this -> connection() -> query($sql);
+
+			if ( $data ) {
+				return true;
+			}
+		}
+
+		/**
+		 * Show single student data
+		 */
+		protected function find($table, $id)
+		{
+			//Data get from student table
+			$sql = "SELECT * FROM $table WHERE id = '$id' ";
+			$data = $this -> connection() -> query($sql);
+
+			if ( $data ) {
+				return $data;
+			}
+		}
 	} //End of abstract class Database
 
 

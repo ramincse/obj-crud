@@ -6,6 +6,13 @@
 
 	//Class instance
 	$student = new Student;
+
+	//Delete
+	if ( isset( $_GET['delete'] ) ) {
+		$id = $_GET['delete'];
+
+		$mess = $student -> deleteStudent($id);
+	}
 ?>
 
 <!DOCTYPE html>
@@ -21,6 +28,11 @@
 <body>
 
 	<div class="wrap-table ">
+		<?php 
+			if ( isset($mess) ) {
+				echo $mess;
+			}
+		?>
 		<a class="btn btn-sm btn-primary" href="index.php">Add new student</a>
 		<div class="card shadow">
 			<div class="card-body">
@@ -52,9 +64,9 @@
 							<td><img src="media/img/students/<?php echo $student_data['photo']; ?>" alt=""></td>
 							<td><?php echo $student_data['status']; ?></td>
 							<td>
-								<a class="btn btn-sm btn-info" href="#">View</a>
+								<a class="btn btn-sm btn-info" href="show.php?id=<?php echo $student_data['id']; ?>">View</a>
 								<a class="btn btn-sm btn-warning" href="#">Edit</a>
-								<a class="btn btn-sm btn-danger" href="#">Delete</a>
+								<a class="btn btn-sm btn-danger" href="?delete=<?php echo $student_data['id']; ?>">Delete</a>
 							</td>
 						</tr>
 						<?php endwhile; ?>
