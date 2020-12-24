@@ -24,6 +24,65 @@
 			return $this -> connection = new mysqli($this -> host, $this -> user, $this -> pass, $this -> db);
 		}
 
+		/**
+		 * File Upload Management
+		 */
+		public function fileUpload($file, $location = '', array $file_format = ['jpg', 'jpeg', 'png', 'gif'], $file_type = null)
+		{
+			//File Info
+			$file_name 	= $file['name'];
+			$file_tmp 	= $file['tmp_name'];
+			$file_size 	= $file['size'];
+
+			//File Extension
+			$file_array = explode('.', $file_name);
+			$file_extension = strtolower(end($file_array));
+
+			//File Default Value
+			if ( !isset( $file_type['type'] ) ) {
+				$file_type['type'] = 'image';
+			}
+
+			//File Default Value
+			if ( !isset( $file_type['file_name'] ) ) {
+				$file_type['file_name'] = '';
+			}
+			if ( !isset( $file_type['fname'] ) ) {
+				$file_type['fname'] = '';
+			}
+			if ( !isset( $file_type['lname'] ) ) {
+				$file_type['lname'] = '';
+			}
+
+			//File name with type
+			if ( $file_type['type'] == 'image' ) {
+				//File Unique Name
+				$unique_file_name = md5( time() . rand() ) . '.' . $file_extension;
+			}elseif( $file_type['type'] == 'file' ){
+				$unique_file_name = date('d_m_Y_g_h_s') . '_' . $file_type['file_name'] . '_' . $file_type['fname'] . '_' . $file_type['lname'] . '.' . $file_extension;
+			}
+
+			//Check File Format
+			$mess = '';
+			if ( in_array($file_extension, $file_format) == false ) {
+				$mess = '<p class="alert alert-danger">Invalid file format ! <button class="close" data-dismiss="alert">&times;</button></p>';
+			}else{
+				//File Upload to Directory
+				move_uploaded_file( $file_tmp, $location . $unique_file_name );
+			}
+
+			// Return Fila name and Message
+			return [
+				'mess' 		=> $mess,
+				'file_name' => $unique_file_name,
+			];
+
+
+		}
+
+		/**
+		 * Data Insert to students table
+		 */
 		protected function insert($table, array $data)
 		{
 			
