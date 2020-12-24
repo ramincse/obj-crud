@@ -1,3 +1,13 @@
+<?php require_once "vendor/autoload.php"; ?>
+
+<?php 
+	//Class use
+	use App\Controller\Student;
+
+	//Class instance
+	$student = new Student;
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,8 +19,6 @@
 	<link rel="stylesheet" href="assets/css/responsive.css">
 </head>
 <body>
-	
-	
 
 	<div class="wrap-table ">
 		<a class="btn btn-sm btn-primary" href="index.php">Add new student</a>
@@ -25,70 +33,33 @@
 							<th>Email</th>
 							<th>Cell</th>
 							<th>Photo</th>
+							<th>Status</th>
 							<th>Action</th>
 						</tr>
 					</thead>
 					<tbody>
+						<?php 
+							$data = $student -> allStudent();
+
+							$i = 1;
+							while( $student_data = $data -> fetch_assoc() ):
+						?>
 						<tr>
-							<td>1</td>
-							<td>Asraful Haque</td>
-							<td>haq@gmail.com</td>
-							<td>01717700811</td>
-							<td><img src="assets/media/img/pp_photo/istockphoto-615279718-612x612.jpg" alt=""></td>
+							<td><?php echo $i; $i++; ?></td>
+							<td><?php echo $student_data['name']; ?></td>
+							<td><?php echo $student_data['email']; ?></td>
+							<td><?php echo $student_data['cell']; ?></td>
+							<td><img src="media/img/students/<?php echo $student_data['photo']; ?>" alt=""></td>
+							<td><?php echo $student_data['status']; ?></td>
 							<td>
 								<a class="btn btn-sm btn-info" href="#">View</a>
 								<a class="btn btn-sm btn-warning" href="#">Edit</a>
 								<a class="btn btn-sm btn-danger" href="#">Delete</a>
 							</td>
 						</tr>
-						<tr>
-							<td>1</td>
-							<td>Asraful Haque</td>
-							<td>haq@gmail.com</td>
-							<td>01717700811</td>
-							<td><img src="assets/media/img/pp_photo/istockphoto-615279718-612x612.jpg" alt=""></td>
-							<td>
-								<a class="btn btn-sm btn-info" href="#">View</a>
-								<a class="btn btn-sm btn-warning" href="#">Edit</a>
-								<a class="btn btn-sm btn-danger" href="#">Delete</a>
-							</td>
-						</tr>
-						<tr>
-							<td>1</td>
-							<td>Asraful Haque</td>
-							<td>haq@gmail.com</td>
-							<td>01717700811</td>
-							<td><img src="assets/media/img/pp_photo/istockphoto-615279718-612x612.jpg" alt=""></td>
-							<td>
-								<a class="btn btn-sm btn-info" href="#">View</a>
-								<a class="btn btn-sm btn-warning" href="#">Edit</a>
-								<a class="btn btn-sm btn-danger" href="#">Delete</a>
-							</td>
-						</tr>
-						<tr>
-							<td>1</td>
-							<td>Asraful Haque</td>
-							<td>haq@gmail.com</td>
-							<td>01717700811</td>
-							<td><img src="assets/media/img/pp_photo/istockphoto-615279718-612x612.jpg" alt=""></td>
-							<td>
-								<a class="btn btn-sm btn-info" href="#">View</a>
-								<a class="btn btn-sm btn-warning" href="#">Edit</a>
-								<a class="btn btn-sm btn-danger" href="#">Delete</a>
-							</td>
-						</tr>
-						<tr>
-							<td>1</td>
-							<td>Asraful Haque</td>
-							<td>haq@gmail.com</td>
-							<td>01717700811</td>
-							<td><img src="assets/media/img/pp_photo/istockphoto-615279718-612x612.jpg" alt=""></td>
-							<td>
-								<a class="btn btn-sm btn-info" href="#">View</a>
-								<a class="btn btn-sm btn-warning" href="#">Edit</a>
-								<a class="btn btn-sm btn-danger" href="#">Delete</a>
-							</td>
-						</tr>
+						<?php endwhile; ?>
+
+						
 						
 
 					</tbody>

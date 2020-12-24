@@ -30,13 +30,20 @@
 				}
 
 			}
-
-
-
-
+		}
+		
+		/**
+		 * Get value from Students Table
+		 */
+		public function allStudent()
+		{
+			$data = $this -> all('students', 'DESC');
+			if ( $data ) {
+				return $data;
+			}
 			
 		}
-	}
+	} //End of class Student extends Database
 
 
 

@@ -27,7 +27,7 @@
 		/**
 		 * File Upload Management
 		 */
-		public function fileUpload($file, $location = '', array $file_format = ['jpg', 'jpeg', 'png', 'gif'], $file_type = null)
+		protected function fileUpload($file, $location = '', array $file_format = ['jpg', 'jpeg', 'png', 'gif'], $file_type = null)
 		{
 			//File Info
 			$file_name 	= $file['name'];
@@ -109,7 +109,21 @@
 				return true;
 			}
 		}
-	}
+
+		/**
+		 * Get all value
+		 */
+		protected function all($table, $order_by)
+		{
+			//Data get from student table
+			$sql = "SELECT * FROM $table ORDER BY id $order_by ";
+			$data = $this -> connection() -> query($sql);
+
+			if ( $data ) {
+				return $data;
+			}
+		}
+	} //End of abstract class Database
 
 
 
